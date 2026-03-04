@@ -48,6 +48,9 @@ No paid cloud dependencies are required to prove the architecture.
 - Decision log: `docs/10-DECISION-LOG.md`
 - GitHub project/issue plan: `docs/13-GITHUB-PROJECT-PLAN.md`
 - Blog journey: `docs/14-BLOG-SERIES.md`
+- Engineering workflow: `docs/15-WORKFLOW.md`
+- Test strategy: `docs/16-TEST-STRATEGY.md`
+- Quality gates: `docs/17-QUALITY-GATES.md`
 - Private-docs convention: `docs/PRIVATE-DOCS.md`
 
 ## Private Local Docs
