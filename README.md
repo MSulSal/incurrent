@@ -51,6 +51,7 @@ No paid cloud dependencies are required to prove the architecture.
 - Engineering workflow: `docs/15-WORKFLOW.md`
 - Test strategy: `docs/16-TEST-STRATEGY.md`
 - Quality gates: `docs/17-QUALITY-GATES.md`
+- Automation baseline: `docs/18-AUTOMATION.md`
 - Private-docs convention: `docs/PRIVATE-DOCS.md`
 
 ## Private Local Docs
