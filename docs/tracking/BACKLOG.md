@@ -5,7 +5,7 @@ This is the execution queue. Keep it ordered and actionable.
 ## P0 (Do Next)
 
 1. Bootstrap GitHub project artifacts (labels, milestone, seed issues).
-2. Lock implementation language/runtime and service layout.
+2. Scaffold Java 21 + Spring Boot multi-module service layout.
 3. Implement vertical slice:
    - `POST /counters/{id}/inc` -> topic publish
    - worker consume -> Redis write

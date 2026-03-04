@@ -8,10 +8,10 @@
   },
   {
     "key": "INC-001",
-    "title": "[Feature] Decide implementation stack and scaffold service layout",
+    "title": "[Feature] Scaffold Java 21 + Spring Boot service layout",
     "labels": ["type:feature", "priority:p0", "track:foundation"],
     "milestone": "MVP",
-    "body": "Select language/runtime for gateway, worker, and load generator. Create repository service/module layout with build/test scripts and local run entrypoints."
+    "body": "Create Java 21 + Spring Boot multi-module layout for gateway and worker services. Add Maven wrapper, baseline build/test scripts, and local run entrypoints compatible with compose."
   },
   {
     "key": "INC-002",

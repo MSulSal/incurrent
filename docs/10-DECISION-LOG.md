@@ -98,3 +98,31 @@ Consequences:
 Follow-up actions:
 
 1. Add benchmark scenario pair: unstriped vs striped.
+
+## DEC-004
+
+Date: 2026-03-04  
+Status: accepted
+
+Context:
+
+Need to finalize implementation choices for Milestone 1 while preserving free-only execution and fast iteration.
+
+Decision:
+
+Use Java 21 + Spring Boot + Redpanda (Kafka API) + Redis + Docker Compose + Micrometer/Prometheus/Grafana as the baseline stack.
+
+Alternatives considered:
+
+1. Go baseline for first implementation.
+2. Kafka OSS broker setup first instead of Redpanda.
+
+Consequences:
+
+1. Aligns with mainstream enterprise backend deployment patterns.
+2. Strong compatibility path with Kafka ecosystem tooling.
+3. Kubernetes and autoscaling are deferred until vertical slice stability.
+
+Follow-up actions:
+
+1. Define service/module layout and test-first package before implementation.

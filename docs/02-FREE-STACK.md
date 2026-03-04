@@ -25,7 +25,7 @@ If a feature depends on paid infrastructure, redesign it until it does not.
 
 ## Load and test
 
-1. k6 OSS or custom Go/Rust load tool.
+1. k6 OSS or custom Java/Go load tool.
 2. Native unit/integration tooling in chosen language.
 
 ## Delivery and management

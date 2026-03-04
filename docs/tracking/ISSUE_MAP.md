@@ -5,7 +5,7 @@ These keys map to entries in `scripts/github/issues.json`.
 ## Foundation
 
 1. `INC-EPIC-001` - [Epic] Foundation: free-only distributed counter platform scaffold
-2. `INC-001` - Select implementation stack and create service skeleton
+2. `INC-001` - Scaffold Java 21 + Spring Boot service layout
 3. `INC-002` - Implement increment API contract and validation
 4. `INC-003` - Publish increment events to partitioned topic
 5. `INC-004` - Implement worker consume -> aggregate -> Redis flush path

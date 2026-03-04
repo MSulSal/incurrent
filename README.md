@@ -52,6 +52,9 @@ No paid cloud dependencies are required to prove the architecture.
 - Test strategy: `docs/16-TEST-STRATEGY.md`
 - Quality gates: `docs/17-QUALITY-GATES.md`
 - Automation baseline: `docs/18-AUTOMATION.md`
+- Implementation stack: `docs/19-IMPLEMENTATION-STACK.md`
+- Service layout spec: `docs/20-SERVICE-LAYOUT.md`
+- Test-first package: `docs/21-TEST-FIRST-PACKAGE.md`
 - Private-docs convention: `docs/PRIVATE-DOCS.md`
 
 ## Private Local Docs
