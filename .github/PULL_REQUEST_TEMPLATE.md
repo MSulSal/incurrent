@@ -6,6 +6,8 @@ Describe what changed and why.
 
 Closes #
 
+Required format: use a closing keyword such as `Closes #123`.
+
 ## Validation
 
 - [ ] Unit/integration tests added or updated

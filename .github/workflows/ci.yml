@@ -36,21 +36,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate JSON files
-        shell: pwsh
+        shell: bash
         run: |
-          $errors = @()
-          $jsonFiles = Get-ChildItem -Recurse -File -Filter *.json
-          foreach ($file in $jsonFiles) {
-            try {
-              $null = Get-Content -Path $file.FullName -Raw | ConvertFrom-Json
-            } catch {
-              $errors += "Invalid JSON: $($file.FullName) - $($_.Exception.Message)"
-            }
-          }
-          if ($errors.Count -gt 0) {
-            $errors | ForEach-Object { Write-Error $_ }
-            throw "JSON validation failed."
-          }
+          failed=0
+          while IFS= read -r -d '' file; do
+            if ! jq empty "$file" >/dev/null 2>&1; then
+              echo "Invalid JSON: $file" >&2
+              failed=1
+            fi
+          done < <(find . -type f -name '*.json' -print0)
+
+          if [[ "$failed" -ne 0 ]]; then
+            exit 1
+          fi
 
   yaml:
     name: YAML Lint
@@ -83,32 +81,26 @@ jobs:
       - name: Actionlint
         uses: rhysd/actionlint@v1.7.11
 
-  powershell:
-    name: PowerShell Syntax
+  bash:
+    name: Bash Script Syntax
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Validate scripts
-        shell: pwsh
+        shell: bash
         run: |
-          $errors = @()
-          Get-ChildItem -Path scripts -Recurse -Filter *.ps1 -ErrorAction SilentlyContinue | ForEach-Object {
-            $parseErrors = $null
-            $null = [System.Management.Automation.Language.Parser]::ParseFile(
-              $_.FullName,
-              [ref]$null,
-              [ref]$parseErrors
-            )
-            if ($parseErrors) {
-              $errors += $parseErrors
-            }
-          }
-          if ($errors.Count -gt 0) {
-            $errors | ForEach-Object { Write-Error $_.Message }
-            throw "PowerShell syntax validation failed."
-          }
+          shopt -s globstar nullglob
+          scripts=(scripts/**/*.sh)
+          if [[ "${#scripts[@]}" -eq 0 ]]; then
+            echo "No bash scripts found."
+            exit 0
+          fi
+
+          for script in "${scripts[@]}"; do
+            bash -n "$script"
+          done
 
   links:
     name: Docs Link Check

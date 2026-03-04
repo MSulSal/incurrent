@@ -1,0 +1,29 @@
+name: PR Issue Link Check
+
+on:
+  pull_request_target:
+    types: [opened, edited, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  require-closing-reference:
+    name: Require Closing Issue Reference
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR body includes closing keyword
+        shell: bash
+        run: |
+          body="$(jq -r '.pull_request.body // ""' "$GITHUB_EVENT_PATH")"
+          pattern='(close[sd]?|fix(e[sd])?|resolve[sd]?)[:[:space:]]+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)?#[0-9]+'
+
+          if printf '%s\n' "$body" | grep -Eiq "$pattern"; then
+            echo "PR body contains a closing issue reference."
+            exit 0
+          fi
+
+          echo "::error::PR description must include a closing reference (example: 'Closes #123')."
+          exit 1

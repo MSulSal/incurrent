@@ -9,10 +9,14 @@ This document describes current CI/automation and when to extend it.
    - JSON validation
    - YAML lint for `.github/`
    - GitHub workflow lint (`actionlint`)
-   - PowerShell syntax validation
+   - Bash script syntax validation
    - Offline markdown link checks
 2. `PR Labeler` (`.github/workflows/pr-labeler.yml`)
    - Applies labels based on changed file paths using `.github/labeler.yml`
+3. `PR Issue Link Check` (`.github/workflows/pr-issue-link.yml`)
+   - Requires PR body to include a closing issue reference (`Closes #123`)
+4. `Issue Auto Close` (`.github/workflows/issue-autoclose.yml`)
+   - Closes referenced issues when PR is merged (safety net)
 
 ## Dependency Automation
 

@@ -12,35 +12,36 @@ Automate project-management setup for Incurrent:
 ## Prerequisites
 
 1. GitHub CLI installed (`gh --version`).
-2. Authenticated session with scopes including `repo`, `project`.
-3. Local checkout tied to target repository remote.
+2. Python installed (`python --version`).
+3. Authenticated session with scopes including `repo`, `project`.
+4. Local checkout tied to target repository remote.
 
 ## Usage
 
 Standard run:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/github/bootstrap-project.ps1
+```bash
+bash scripts/github/bootstrap-project.sh
 ```
 
 Dry run:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/github/bootstrap-project.ps1 -DryRun
+```bash
+bash scripts/github/bootstrap-project.sh --dry-run
 ```
 
 Skip project board creation:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/github/bootstrap-project.ps1 -SkipProject
+```bash
+bash scripts/github/bootstrap-project.sh --skip-project
 ```
 
 Custom title/milestone:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/github/bootstrap-project.ps1 `
-  -ProjectTitle "Incurrent - Delivery Board" `
-  -Milestone "MVP"
+```bash
+bash scripts/github/bootstrap-project.sh \
+  --project-title "Incurrent - Delivery Board" \
+  --milestone "MVP"
 ```
 
 ## Notes

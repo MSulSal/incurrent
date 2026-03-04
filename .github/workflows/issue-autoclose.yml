@@ -1,0 +1,47 @@
+name: Issue Auto Close
+
+on:
+  pull_request_target:
+    types: [closed]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+jobs:
+  close-referenced-issues:
+    name: Close Referenced Issues
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close linked issues from PR body
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          body="$(jq -r '.pull_request.body // ""' "$GITHUB_EVENT_PATH")"
+          pr_number="$(jq -r '.pull_request.number' "$GITHUB_EVENT_PATH")"
+
+          mapfile -t issue_numbers < <(
+            printf '%s\n' "$body" \
+              | grep -Eio '(close[sd]?|fix(e[sd])?|resolve[sd]?)[:[:space:]]+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)?#[0-9]+' \
+              | grep -Eo '#[0-9]+' \
+              | tr -d '#' \
+              | sort -u
+          )
+
+          if [[ "${#issue_numbers[@]}" -eq 0 ]]; then
+            echo "No linked issues found in PR body."
+            exit 0
+          fi
+
+          for issue in "${issue_numbers[@]}"; do
+            state="$(gh issue view "$issue" --repo "$REPO" --json state --jq .state 2>/dev/null || true)"
+            if [[ "$state" == "OPEN" ]]; then
+              gh issue close "$issue" --repo "$REPO" --comment "Closed automatically by merged PR #$pr_number."
+            else
+              echo "Issue #$issue already closed or unavailable."
+            fi
+          done

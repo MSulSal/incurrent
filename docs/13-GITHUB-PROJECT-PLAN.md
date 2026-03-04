@@ -44,8 +44,8 @@ Recommended project fields:
 
 Run:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/github/bootstrap-project.ps1
+```bash
+bash scripts/github/bootstrap-project.sh
 ```
 
 The script will:

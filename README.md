@@ -67,8 +67,8 @@ Personal working notes belong in `docs/private/` and are gitignored by default.
 
 This repo includes scripts to create labels, milestone, GitHub project, and seeded issues:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/github/bootstrap-project.ps1
+```bash
+bash scripts/github/bootstrap-project.sh
 ```
 
 Script docs: `scripts/github/README.md`

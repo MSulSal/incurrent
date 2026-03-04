@@ -29,6 +29,7 @@ For each feature issue, prefer this sequence:
 2. No "green tests" claim without executable commands in PR notes.
 3. Performance/correctness claims require benchmark or drill evidence.
 4. Architecture behavior changes require a decision-log entry.
+5. PR body must include a closing issue reference (for example `Closes #123`).
 
 ## Commit Message Pattern
 
