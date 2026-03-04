@@ -5,6 +5,14 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   markdown:
@@ -20,6 +28,61 @@ jobs:
           globs: |
             **/*.md
 
+  json:
+    name: JSON Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        shell: pwsh
+        run: |
+          $errors = @()
+          $jsonFiles = Get-ChildItem -Recurse -File -Filter *.json
+          foreach ($file in $jsonFiles) {
+            try {
+              $null = Get-Content -Path $file.FullName -Raw | ConvertFrom-Json
+            } catch {
+              $errors += "Invalid JSON: $($file.FullName) - $($_.Exception.Message)"
+            }
+          }
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_ }
+            throw "JSON validation failed."
+          }
+
+  yaml:
+    name: YAML Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Yamllint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .github
+          strict: false
+          config_data: |
+            extends: default
+            rules:
+              line-length:
+                max: 180
+                level: warning
+              truthy:
+                check-keys: false
+
+  actionlint:
+    name: GitHub Workflow Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Actionlint
+        uses: rhysd/actionlint@v1
+
   powershell:
     name: PowerShell Syntax
     runs-on: ubuntu-latest
@@ -32,6 +95,7 @@ jobs:
         run: |
           $errors = @()
           Get-ChildItem -Path scripts -Recurse -Filter *.ps1 -ErrorAction SilentlyContinue | ForEach-Object {
+            $parseErrors = $null
             $null = [System.Management.Automation.Language.Parser]::ParseFile(
               $_.FullName,
               [ref]$null,
@@ -45,3 +109,17 @@ jobs:
             $errors | ForEach-Object { Write-Error $_.Message }
             throw "PowerShell syntax validation failed."
           }
+
+  links:
+    name: Docs Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Link check (offline/local)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress --exclude-mail "**/*.md"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

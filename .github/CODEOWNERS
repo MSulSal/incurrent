@@ -1,0 +1,9 @@
+# Default owner
+* @MSulSal
+
+# GitHub automation
+.github/** @MSulSal
+scripts/github/** @MSulSal
+
+# Architecture and operations docs
+docs/** @MSulSal

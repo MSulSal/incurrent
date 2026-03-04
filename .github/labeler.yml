@@ -1,0 +1,33 @@
+type:docs:
+  - changed-files:
+      - any-glob-to-any-file: ["**/*.md"]
+
+track:foundation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+          - "scripts/**"
+          - "README.md"
+          - "docs/15-WORKFLOW.md"
+          - "docs/16-TEST-STRATEGY.md"
+          - "docs/17-QUALITY-GATES.md"
+
+track:publication:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/blog/**"
+          - "docs/14-BLOG-SERIES.md"
+          - "docs/PRIVATE-DOCS.md"
+
+type:benchmark:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "benchmarks/**"
+          - "loadtest/**"
+
+track:observability:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "grafana/**"
+          - "prometheus/**"
+          - "ops/monitoring/**"
