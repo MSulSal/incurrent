@@ -6,7 +6,10 @@ Milestone: `MVP`
 
 ## Problem
 
-In distributed systems, retries are normal. Clients retry on timeouts, producers retry publish failures, and consumers can re-read messages after rebalances. If each duplicate increment is blindly applied, totals drift upward and trust in the system disappears.
+In distributed systems, retries are normal. Clients retry on timeouts,
+producers retry publish failures, and consumers can re-read messages after
+rebalances. If each duplicate increment is blindly applied, totals drift upward
+and trust in the system disappears.
 
 ## Naive approach and why it fails
 
@@ -30,7 +33,9 @@ This keeps transport semantics at-least-once, while application effect becomes e
 
 ## Tradeoff that matters
 
-Dedupe state is not free. A longer retention window reduces duplicate risk but increases memory/storage pressure. The right TTL is a product decision tied to expected client retry windows and memory budget.
+Dedupe state is not free. A longer retention window reduces duplicate risk but
+increases memory/storage pressure. The right TTL is a product decision tied to
+expected client retry windows and memory budget.
 
 ## Footgun
 

@@ -2,7 +2,10 @@
 
 ## One-Line Pitch
 
-Incurrent is an event-driven distributed counter platform built to demonstrate real backend systems engineering: high-throughput ingestion, idempotent processing, hot-key scaling, deterministic overload behavior, and operational recovery.
+Incurrent is an event-driven distributed counter platform built to demonstrate
+real backend systems engineering: high-throughput ingestion, idempotent
+processing, hot-key scaling, deterministic overload behavior, and operational
+recovery.
 
 ## Engineering Value
 

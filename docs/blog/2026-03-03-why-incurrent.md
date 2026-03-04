@@ -6,7 +6,10 @@ Milestone: `MVP`
 
 ## The real objective
 
-I wanted a focused reference implementation that proves a system can stay correct and stable under pressure. Standard CRUD projects are useful, but they rarely force decisions around retries, partitioning, idempotency, lag, and recovery.
+I wanted a focused reference implementation that proves a system can stay
+correct and stable under pressure. Standard CRUD projects are useful, but they
+rarely force decisions around retries, partitioning, idempotency, lag, and
+recovery.
 
 Incurrent is centered on one difficult but focused problem: high-rate distributed increments that must converge correctly even when infrastructure behaves imperfectly.
 
@@ -42,7 +45,9 @@ By the end, Incurrent should answer the core design-review questions:
 
 ## Footgun I want to avoid early
 
-The biggest risk is building too much surface area (UI, auth, extra services) before the core distributed behavior is validated. The roadmap intentionally protects against that by forcing a narrow vertical slice first.
+The biggest risk is building too much surface area (UI, auth, extra services)
+before the core distributed behavior is validated. The roadmap intentionally
+protects against that by forcing a narrow vertical slice first.
 
 ## Technical takeaway
 
