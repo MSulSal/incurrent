@@ -126,3 +126,33 @@ Consequences:
 Follow-up actions:
 
 1. Define service/module layout and test-first package before implementation.
+
+## DEC-005
+
+Date: 2026-03-04  
+Status: accepted
+
+Context:
+
+Project automation moved to Bash while core services remain Java, creating a
+multi-language environment.
+
+Decision:
+
+Adopt explicit language boundaries: Java for domain/service code, Bash for
+automation, and Python only as a narrow parsing helper inside Bash workflows.
+
+Alternatives considered:
+
+1. Pure single-language policy across all project areas.
+2. PowerShell as primary automation shell.
+
+Consequences:
+
+1. Better alignment with Linux CI/runtime environments.
+2. Maintains clarity by preventing domain logic from leaking into scripts.
+3. Requires discipline to avoid unnecessary language sprawl.
+
+Follow-up actions:
+
+1. Maintain language-boundary guidance in docs and PR review checks.

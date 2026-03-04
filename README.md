@@ -57,6 +57,9 @@ No paid cloud dependencies are required to prove the architecture.
 - Test-first package: `docs/21-TEST-FIRST-PACKAGE.md`
 - INC-002 increment contract: `docs/22-INC-002-INCREMENT-CONTRACT.md`
 - INC-002 test matrix: `docs/23-INC-002-TEST-MATRIX.md`
+- Tooling justifications: `docs/24-TOOLING-JUSTIFICATIONS.md`
+- Multi-language strategy: `docs/25-MULTI-LANGUAGE-STRATEGY.md`
+- Engineering growth plan: `docs/26-ENGINEERING-GROWTH-PLAN.md`
 - Private-docs convention: `docs/PRIVATE-DOCS.md`
 
 ## Private Local Docs
