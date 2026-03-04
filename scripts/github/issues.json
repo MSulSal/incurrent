@@ -1,0 +1,205 @@
+[
+  {
+    "key": "INC-EPIC-001",
+    "title": "[Epic] Foundation: free-only distributed counter platform scaffold",
+    "labels": ["type:epic", "priority:p0", "track:foundation"],
+    "milestone": "MVP",
+    "body": "Objective: establish the free-only repo, architecture boundaries, and first shippable vertical slice.\\n\\nAcceptance criteria:\\n- Service layout and tooling are locked.\\n- Increment -> stream -> worker -> Redis -> read path works.\\n- Basic metrics/health endpoints are operational."
+  },
+  {
+    "key": "INC-001",
+    "title": "[Feature] Decide implementation stack and scaffold service layout",
+    "labels": ["type:feature", "priority:p0", "track:foundation"],
+    "milestone": "MVP",
+    "body": "Select language/runtime for gateway, worker, and load generator. Create repository service/module layout with build/test scripts and local run entrypoints."
+  },
+  {
+    "key": "INC-002",
+    "title": "[Feature] Implement POST /counters/{id}/inc contract and validation",
+    "labels": ["type:feature", "priority:p0", "track:foundation"],
+    "milestone": "MVP",
+    "body": "Implement increment endpoint accepting {delta, op_id}. Enforce payload validation, bounded delta rules, and request tracing metadata."
+  },
+  {
+    "key": "INC-003",
+    "title": "[Feature] Publish increment events to partitioned inc_events topic",
+    "labels": ["type:feature", "priority:p0", "track:foundation"],
+    "milestone": "MVP",
+    "body": "Gateway publishes normalized increment events to inc_events keyed for partition locality. Include publish metrics and error handling."
+  },
+  {
+    "key": "INC-004",
+    "title": "[Feature] Build worker consume -> aggregate -> Redis flush loop",
+    "labels": ["type:feature", "priority:p0", "track:foundation"],
+    "milestone": "MVP",
+    "body": "Implement consumer worker that batches increments and flushes updates to Redis. Commit offsets only after successful flush."
+  },
+  {
+    "key": "INC-005",
+    "title": "[Feature] Implement GET /counters/{id} and POST /counters/bulk_get",
+    "labels": ["type:feature", "priority:p1", "track:foundation"],
+    "milestone": "MVP",
+    "body": "Expose low-latency single-key read endpoint and bounded bulk read endpoint for dashboard and verification workflows."
+  },
+  {
+    "key": "INC-EPIC-002",
+    "title": "[Epic] Correctness: idempotent processing under retries",
+    "labels": ["type:epic", "priority:p0", "track:correctness"],
+    "milestone": "MVP",
+    "body": "Objective: ensure duplicate logical operations do not over-apply during retries and reprocessing.\\n\\nAcceptance criteria:\\n- op_id dedupe policy implemented and documented.\\n- Retry-heavy workload produces zero correctness mismatches within dedupe window."
+  },
+  {
+    "key": "INC-006",
+    "title": "[Feature] Add op_id dedupe store with TTL and memory budget controls",
+    "labels": ["type:feature", "priority:p0", "track:correctness"],
+    "milestone": "MVP",
+    "body": "Add dedupe guard keyed by op_id with explicit TTL boundary. Document memory growth assumptions and fallback behavior when pressure rises."
+  },
+  {
+    "key": "BEN-004",
+    "title": "[Benchmark] Retry-heavy correctness audit with duplicate op_id traffic",
+    "labels": ["type:benchmark", "priority:p1", "track:correctness"],
+    "milestone": "MVP",
+    "body": "Run workload with intentional retries and duplicate op_id values. Compare expected totals vs observed totals and record dedupe hit ratio."
+  },
+  {
+    "key": "INC-EPIC-003",
+    "title": "[Epic] Scale: skewed load and hot-key mitigation",
+    "labels": ["type:epic", "priority:p0", "track:scale"],
+    "milestone": "MVP",
+    "body": "Objective: characterize skew behavior and mitigate hot-key bottlenecks.\\n\\nAcceptance criteria:\\n- Baseline skew benchmark without striping is recorded.\\n- Striping implementation is benchmarked against baseline.\\n- Improvement claims are evidence-backed."
+  },
+  {
+    "key": "INC-007",
+    "title": "[Feature] Build load generator profiles (uniform, Zipf, burst, retry)",
+    "labels": ["type:feature", "priority:p0", "track:scale"],
+    "milestone": "MVP",
+    "body": "Implement configurable load generator with concurrency, key distribution, retry behavior, and burst controls suitable for local and k8s runs."
+  },
+  {
+    "key": "BEN-001",
+    "title": "[Benchmark] Baseline run with uniform key distribution",
+    "labels": ["type:benchmark", "priority:p1", "track:scale"],
+    "milestone": "MVP",
+    "body": "Run benchmark under uniform distribution to establish baseline throughput and latency before skew-focused optimizations."
+  },
+  {
+    "key": "BEN-002",
+    "title": "[Benchmark] Skew run with Zipf distribution (no striping)",
+    "labels": ["type:benchmark", "priority:p1", "track:scale"],
+    "milestone": "MVP",
+    "body": "Execute skewed workload without hot-key striping. Capture lag concentration, throughput ceiling, and p95/p99 latency impact."
+  },
+  {
+    "key": "INC-008",
+    "title": "[Feature] Implement striped counter mode for hot logical keys",
+    "labels": ["type:feature", "priority:p0", "track:scale"],
+    "milestone": "MVP",
+    "body": "Add logical->physical stripe mapping and deterministic stripe routing. Update read path to aggregate stripes safely."
+  },
+  {
+    "key": "BEN-003",
+    "title": "[Benchmark] Skew run with striping enabled and compare vs baseline",
+    "labels": ["type:benchmark", "priority:p1", "track:scale"],
+    "milestone": "MVP",
+    "body": "Repeat Zipf skew scenario with striping enabled and produce side-by-side comparison (throughput, p95/p99, lag concentration)."
+  },
+  {
+    "key": "INC-EPIC-004",
+    "title": "[Epic] Operability: backpressure, replay, and failure drills",
+    "labels": ["type:epic", "priority:p0", "track:observability"],
+    "milestone": "MVP",
+    "body": "Objective: keep system stable under stress and prove recoverability.\\n\\nAcceptance criteria:\\n- Bounded backpressure and shed signals implemented.\\n- Replay workflow rebuilds state from log/snapshot.\\n- Core failure drills are executed and documented."
+  },
+  {
+    "key": "INC-009",
+    "title": "[Feature] Implement bounded ingress queue, adaptive batching, and 429 shedding",
+    "labels": ["type:feature", "priority:p0", "track:observability"],
+    "milestone": "MVP",
+    "body": "Add deterministic overload behavior: bounded queue depth, adaptive batch size limits, and explicit request shedding with metrics."
+  },
+  {
+    "key": "INC-010",
+    "title": "[Feature] Implement admin replay endpoint for state rebuild",
+    "labels": ["type:feature", "priority:p1", "track:observability"],
+    "milestone": "MVP",
+    "body": "Add replay path to rebuild materialized state from event log and optional snapshots. Track replay duration and correctness checks."
+  },
+  {
+    "key": "INC-011",
+    "title": "[Feature] Add Prometheus metrics and Grafana dashboards",
+    "labels": ["type:feature", "priority:p1", "track:observability"],
+    "milestone": "MVP",
+    "body": "Instrument gateway and workers for ingest rate, lag, latency, dedupe hit ratio, shed rate, and Redis latency. Ship dashboard definitions."
+  },
+  {
+    "key": "DRILL-001",
+    "title": "[Drill] Kill worker during peak load and verify convergence",
+    "labels": ["type:drill", "priority:p1", "track:observability"],
+    "milestone": "MVP",
+    "body": "Terminate one worker under sustained load. Confirm lag recovery, rebalance behavior, and invariant correctness."
+  },
+  {
+    "key": "DRILL-002",
+    "title": "[Drill] Force rebalance by scaling worker replicas mid-run",
+    "labels": ["type:drill", "priority:p1", "track:observability"],
+    "milestone": "MVP",
+    "body": "Scale worker count during active load to trigger partition reassignment. Validate no prolonged correctness drift."
+  },
+  {
+    "key": "DRILL-003",
+    "title": "[Drill] Inject Redis latency and validate graceful degradation",
+    "labels": ["type:drill", "priority:p1", "track:observability"],
+    "milestone": "MVP",
+    "body": "Inject downstream latency and observe queue depth, shed rate, and service stability. Confirm system avoids collapse."
+  },
+  {
+    "key": "DRILL-004",
+    "title": "[Drill] Restart broker during load and verify recovery behavior",
+    "labels": ["type:drill", "priority:p1", "track:observability"],
+    "milestone": "MVP",
+    "body": "Restart message broker under active traffic. Measure disruption window, recovery, and post-recovery correctness."
+  },
+  {
+    "key": "DRILL-005",
+    "title": "[Drill] Wipe Redis and rebuild state via replay",
+    "labels": ["type:drill", "priority:p1", "track:observability"],
+    "milestone": "MVP",
+    "body": "Delete materialized state and run replay workflow. Verify recovered totals match expected values and report replay duration."
+  },
+  {
+    "key": "INC-EPIC-005",
+    "title": "[Epic] Technical publication and walkthrough readiness",
+    "labels": ["type:epic", "priority:p1", "track:publication"],
+    "milestone": "MVP",
+    "body": "Objective: package implementation results into technical publication artifacts.\\n\\nAcceptance criteria:\\n- Technical summary notes updated with validated metrics.\\n- Blog case studies published from real evidence.\\n- Architecture walkthrough script complete."
+  },
+  {
+    "key": "DOC-001",
+    "title": "[Feature] Publish case-study article with benchmark and drill evidence",
+    "labels": ["type:docs", "priority:p1", "track:publication"],
+    "milestone": "MVP",
+    "body": "Write a long-form technical narrative with architecture choices, footguns, benchmark data, and reliability drill outcomes."
+  },
+  {
+    "key": "DOC-002",
+    "title": "[Feature] Finalize technical outcome summary with measured results",
+    "labels": ["type:docs", "priority:p1", "track:publication"],
+    "milestone": "MVP",
+    "body": "Update technical outcome summary with hard numbers and defensible claims sourced from benchmark/drill artifacts."
+  },
+  {
+    "key": "DOC-003",
+    "title": "[Feature] Build architecture walkthrough script from project docs",
+    "labels": ["type:docs", "priority:p1", "track:publication"],
+    "milestone": "MVP",
+    "body": "Prepare a concise walkthrough script covering design tradeoffs, correctness model, scaling strategy, and failure handling."
+  },
+  {
+    "key": "INC-012",
+    "title": "[Feature] Optional: add k8s autoscaling based on consumer lag",
+    "labels": ["type:feature", "priority:p2", "track:scale"],
+    "milestone": "MVP",
+    "body": "Add optional KEDA or custom metric autoscaling for worker replicas using lag thresholds and cooldown windows."
+  }
+]

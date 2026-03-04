@@ -1,0 +1,40 @@
+name: Failure Drill
+description: Define and record a chaos/failure scenario with expected system behavior.
+title: "[Drill] "
+labels: ["type:drill", "priority:p1"]
+body:
+  - type: input
+    id: drill_name
+    attributes:
+      label: Drill Name
+      placeholder: kill worker during peak write load
+    validations:
+      required: true
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: What should happen and why?
+    validations:
+      required: true
+  - type: textarea
+    id: execution
+    attributes:
+      label: Execution Steps
+      description: Exact script or commands used.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Signals
+      description: Metrics/log lines/state invariants expected during and after failure.
+    validations:
+      required: true
+  - type: textarea
+    id: postmortem
+    attributes:
+      label: Postmortem Notes
+      description: What happened, what surprised us, and what changes now.
+    validations:
+      required: true

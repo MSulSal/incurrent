@@ -1,0 +1,48 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs and temp
+*.log
+tmp/
+temp/
+coverage/
+
+# Private local working docs
+docs/private/
+CONTRIBUTING.md
+
+# Codex-only local instructions
+AGENTS.md
+.codex/
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Go
+bin/
+
+# Local infra state
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Misc
+*.swp
+*.swo

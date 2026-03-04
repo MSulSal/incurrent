@@ -1,0 +1,41 @@
+name: Benchmark Run
+description: Plan and capture a reproducible benchmark execution.
+title: "[Benchmark] "
+labels: ["type:benchmark", "priority:p1"]
+body:
+  - type: input
+    id: scenario
+    attributes:
+      label: Scenario Name
+      placeholder: hot-key baseline without striping
+    validations:
+      required: true
+  - type: textarea
+    id: workload
+    attributes:
+      label: Workload Definition
+      description: Concurrency, request mix, key distribution, duration.
+      placeholder: 500 clients, Zipf s=1.2, 15m run, 90% writes.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Hardware, docker/k8s setup, image versions.
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: Success Criteria
+      placeholder: p99 < 400ms, error rate < 0.5%, no data divergence.
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Required Artifacts
+      description: What screenshots, raw files, and dashboard exports must be attached.
+    validations:
+      required: true

@@ -1,0 +1,34 @@
+name: Feature
+description: Implement a concrete engineering capability.
+title: "[Feature] "
+labels: ["type:feature", "priority:p1"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What pain point or risk does this feature solve?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: API, data model, flow, and why this approach.
+    validations:
+      required: true
+  - type: textarea
+    id: observability
+    attributes:
+      label: Observability Plan
+      description: Metrics/logs/traces to prove behavior.
+      placeholder: Counter ingest rate, dedupe hit ratio, flush error rate.
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test Plan
+      description: What evidence will prove this works?
+    validations:
+      required: true

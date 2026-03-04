@@ -1,0 +1,72 @@
+[
+  {
+    "name": "type:epic",
+    "color": "B60205",
+    "description": "Large cross-cutting deliverable"
+  },
+  {
+    "name": "type:feature",
+    "color": "1D76DB",
+    "description": "Implementation feature"
+  },
+  {
+    "name": "type:benchmark",
+    "color": "5319E7",
+    "description": "Benchmark design or execution"
+  },
+  {
+    "name": "type:drill",
+    "color": "0E8A16",
+    "description": "Failure/chaos drill"
+  },
+  {
+    "name": "type:docs",
+    "color": "0075CA",
+    "description": "Documentation change"
+  },
+  {
+    "name": "type:bug",
+    "color": "D73A4A",
+    "description": "Defect report"
+  },
+  {
+    "name": "priority:p0",
+    "color": "B60205",
+    "description": "Highest priority"
+  },
+  {
+    "name": "priority:p1",
+    "color": "FBCA04",
+    "description": "Important, not urgent"
+  },
+  {
+    "name": "priority:p2",
+    "color": "0E8A16",
+    "description": "Nice to have"
+  },
+  {
+    "name": "track:foundation",
+    "color": "0052CC",
+    "description": "Core platform foundations"
+  },
+  {
+    "name": "track:correctness",
+    "color": "1F883D",
+    "description": "Idempotency and correctness"
+  },
+  {
+    "name": "track:scale",
+    "color": "A371F7",
+    "description": "Performance and scaling"
+  },
+  {
+    "name": "track:observability",
+    "color": "5319E7",
+    "description": "Metrics, dashboards, operations"
+  },
+  {
+    "name": "track:publication",
+    "color": "C2E0C6",
+    "description": "Technical publication and walkthrough materials"
+  }
+]

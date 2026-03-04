@@ -1,0 +1,50 @@
+name: Epic
+description: Large cross-cutting deliverable with clear milestones and acceptance criteria.
+title: "[Epic] "
+labels: ["type:epic", "priority:p0"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What business or engineering outcome does this epic produce?
+      placeholder: Build end-to-end idempotent counter flow with replay and metrics.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: In Scope
+      description: Explicit deliverables.
+      placeholder: |
+        - Gateway increment endpoint
+        - Worker flush pipeline
+        - Redis state model
+    validations:
+      required: true
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of Scope
+      description: Keep scope bounded.
+      placeholder: Auth, billing, historical analytics UI.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Measurable done conditions.
+      placeholder: |
+        - 50k events/s sustained for 15m
+        - p99 end-to-end latency < 400ms
+        - Duplicate op_id does not double-apply
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks
+      description: Main technical/operational risks and mitigations.
+    validations:
+      required: true
