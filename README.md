@@ -55,6 +55,8 @@ No paid cloud dependencies are required to prove the architecture.
 - Implementation stack: `docs/19-IMPLEMENTATION-STACK.md`
 - Service layout spec: `docs/20-SERVICE-LAYOUT.md`
 - Test-first package: `docs/21-TEST-FIRST-PACKAGE.md`
+- INC-002 increment contract: `docs/22-INC-002-INCREMENT-CONTRACT.md`
+- INC-002 test matrix: `docs/23-INC-002-TEST-MATRIX.md`
 - Private-docs convention: `docs/PRIVATE-DOCS.md`
 
 ## Private Local Docs

@@ -9,6 +9,10 @@ Initial focus:
 1. Increment API contract (`POST /counters/{id}/inc`)
 2. Read API contract (`GET /counters/{id}`)
 3. Event publish behavior and validation boundaries
+4. Contract source documents:
+   - `docs/22-INC-002-INCREMENT-CONTRACT.md`
+   - `docs/23-INC-002-TEST-MATRIX.md`
+   - `specs/json/*.schema.json`
 
 ## Test Tooling Baseline
 

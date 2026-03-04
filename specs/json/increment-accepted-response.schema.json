@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://incurrent.local/specs/json/increment-accepted-response.schema.json",
+  "title": "IncrementAcceptedResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "counter_id",
+    "op_id",
+    "accepted_at_ms",
+    "request_id"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "const": "accepted"
+    },
+    "counter_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9:_-]{1,128}$"
+    },
+    "op_id": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[47][0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "accepted_at_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    }
+  }
+}
